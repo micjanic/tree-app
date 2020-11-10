@@ -16,11 +16,10 @@
     "apollo-link-http": "^1.5.16",
     "apollo-server": "^2.9.6",
     "apollo-server-express": "^2.18.0-rc.1",
-    "flexboxgrid": "^6.3.1",
+    "dotenv": "^8.2.0",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
-    "json5": "^2.1.0",
-    "lowdb": "^1.0.0",
+    "mongoose": "^5.10.13",
     "nanoid": "^2.1.1",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
@@ -28,12 +27,10 @@
     "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
-    "@playlyfe/gql": "^2.6.2",
     "babel-core": "^6.26.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "jest": "^24.9.0",
     "parcel": "^1.12.3"
   }
 }
