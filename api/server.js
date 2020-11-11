@@ -23,6 +23,7 @@ const typeDefs = gql`
   }
 
   input ParentInput {
+    id: ID
     firstName: String!
     lastName: String!
   }
@@ -62,10 +63,26 @@ const resolvers = {
   },
   Mutation: {
     newPerson: (_, { input, parents }, ctx) => {
-      return ctx.Person.findOneAndUpdate(input, input, {
-        new: true,
-        upsert: true,
-      })
+      const parentID = ctx.find()
+      return ctx.Person.findOneAndUpdate(
+        input,
+        { parents },
+        {
+          new: true,
+          upsert: true,
+        }
+      ).then((person) => {})
+
+      /*.then((person) => {
+        return ctx.Person.findOneAndUpdate(
+          person.parents[0],
+          { children: [person.id] },
+          {
+            new: true,
+            upsert: true,
+          }
+        )
+      })*/
     },
     removeAll: (_, __, ctx) => {
       console.log('reset DB')
