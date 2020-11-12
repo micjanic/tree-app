@@ -2,9 +2,9 @@
   "name": "familyApp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "api/server.js",
   "scripts": {
-    "server": "nodemon api/server.js"
+    "server": "nodemon --exec babel-node api/server.js"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +27,10 @@
     "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/node": "^7.12.6",
+    "@babel/preset-env": "^7.12.1",
     "babel-core": "^6.26.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
