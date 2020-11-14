@@ -25,11 +25,13 @@ export const resolvers = {
         },
     },
     Person: {
-        parents(person, __, ctx) {
-            console.log(person)
+        parents(person, _, ctx) {
             return ctx.Person.find({
                 _id: { $in: person.parents },
             })
+        },
+        father(person, _, ctx) {
+            return ctx.Person.findOne({ _id: person.father })
         },
     },
 }

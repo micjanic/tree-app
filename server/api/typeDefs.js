@@ -5,19 +5,24 @@ export const typeDefs = gql`
         id: ID
         firstName: String
         lastName: String
+        mother: Person
+        father: Person
         parents: [Person]
+        children: [Person]
     }
 
     input PersonInput {
         id: ID
         firstName: String
         lastName: String
+        mother: ID
+        father: ID
         parents: [ID]
     }
 
     type Query {
         person(input: PersonInput): Person
-        people(input: PersonInput): [Person]!
+        people(input: PersonInput): [Person]
     }
 
     type Mutation {
