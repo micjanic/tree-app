@@ -8,15 +8,35 @@ export const resolvers = {
         },
     },
     Mutation: {
-        newPerson: (_, { input, parents }, ctx) => {
-            const newPerson = ctx.Person.findOneAndUpdate(
+        newPerson: async (_, { input, mother, father }, ctx) => {
+            const newPerson = await ctx.Person.findOneAndUpdate(
                 input,
-                { parents },
                 {
-                    new: true,
-                    upsert: true,
-                }
+                    mother: await ctx.Person.findOneAndUpdate(
+                        mother,
+                        {},
+                        {
+                            new: true,
+                            upsert: true,
+                        }
+                    ).then((mother) => mother.id),
+                    father: await ctx.Person.findOneAndUpdate(
+                        father,
+                        {},
+                        {
+                            new: true,
+                            upsert: true,
+                        }
+                    ).then((father) => father.id),
+                },
+                { new: true, upsert: true }
             )
+            const updateParents = await ctx.Person.updateMany(
+                { _id: { $in: [newPerson.mother, newPerson.father] } },
+                { $addToSet: { children: newPerson.id } }
+            )
+
+            //console.log(newPerson)
             return newPerson
         },
         removeAll: (_, __, ctx) => {
@@ -25,13 +45,16 @@ export const resolvers = {
         },
     },
     Person: {
+        father(person, _, ctx) {
+            return ctx.Person.findOne({ _id: person.father })
+        },
+        mother(person, _, ctx) {
+            return ctx.Person.findOne({ _id: person.mother })
+        },
         parents(person, _, ctx) {
             return ctx.Person.find({
                 _id: { $in: person.parents },
             })
-        },
-        father(person, _, ctx) {
-            return ctx.Person.findOne({ _id: person.father })
         },
     },
 }
