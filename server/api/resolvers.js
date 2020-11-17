@@ -50,9 +50,18 @@ export const resolvers = {
             return ctx.Person.findOne({ _id: person.mother })
         },
         parents(person, _, ctx) {
-            console.log(person)
             return ctx.Person.find({
                 _id: { $in: [person.father, person.mother] },
+            })
+        },
+        children(person, _, ctx) {
+            return ctx.Person.find({
+                _id: { $in: person.children },
+            })
+        },
+        children(person, _, ctx) {
+            return ctx.Person.find({
+                _id: { $in: person.children },
             })
         },
     },
