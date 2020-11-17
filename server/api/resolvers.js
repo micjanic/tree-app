@@ -35,8 +35,6 @@ export const resolvers = {
                 { _id: { $in: [newPerson.mother, newPerson.father] } },
                 { $addToSet: { children: newPerson.id } }
             )
-
-            //console.log(newPerson)
             return newPerson
         },
         removeAll: (_, __, ctx) => {
@@ -52,8 +50,9 @@ export const resolvers = {
             return ctx.Person.findOne({ _id: person.mother })
         },
         parents(person, _, ctx) {
+            console.log(person)
             return ctx.Person.find({
-                _id: { $in: person.parents },
+                _id: { $in: [person.father, person.mother] },
             })
         },
     },

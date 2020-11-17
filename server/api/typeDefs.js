@@ -8,9 +8,9 @@ export const typeDefs = gql`
         gender: String
         mother: Person
         father: Person
-        parents: [ID]
-        children: [ID]
-        siblings: [ID]
+        parents: [Person]
+        children: [Person]
+        siblings: [Person]
     }
 
     input PersonInput {

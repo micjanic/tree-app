@@ -6,7 +6,7 @@ const personSchema = new Schema({
     lastName: { type: String },
     mother: Schema.Types.Mixed,
     father: Schema.Types.Mixed,
-    parents: { type: Array },
+    parents: Schema.Types.Mixed,
     children: { type: Array },
 })
 
