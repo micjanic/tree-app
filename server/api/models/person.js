@@ -5,6 +5,8 @@ const personSchema = new Schema({
     firstName: { type: String },
     lastName: { type: String },
     gender: { type: String },
+    birthday: { type: Date },
+    currentDay: { type: String },
     mother: Schema.Types.Mixed,
     father: Schema.Types.Mixed,
     parents: Schema.Types.Mixed,

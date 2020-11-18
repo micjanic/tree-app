@@ -6,6 +6,8 @@ export const typeDefs = gql`
         firstName: String
         lastName: String
         gender: String
+        birthday: String
+        currentAge: String
         mother: Person
         father: Person
         parents: [Person]
@@ -18,6 +20,7 @@ export const typeDefs = gql`
         firstName: String
         lastName: String
         gender: String
+        birthday: String
         mother: PersonInput
         father: PersonInput
         parents: [PersonInput]

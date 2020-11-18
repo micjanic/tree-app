@@ -31,6 +31,7 @@ export const resolvers = {
                 },
                 { new: true, upsert: true }
             )
+
             const updateParents = await ctx.Person.updateMany(
                 { _id: { $in: [newPerson.mother, newPerson.father] } },
                 { $addToSet: { children: newPerson.id } }
@@ -49,6 +50,34 @@ export const resolvers = {
         mother(person, _, ctx) {
             return ctx.Person.findOne({ _id: person.mother })
         },
+        birthday(person, _, ctx) {
+            const date = new Date(person.birthday)
+            var strArray = [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December',
+            ]
+            const d = date.getDate()
+            const m = strArray[date.getMonth()]
+            const y = date.getFullYear()
+
+            return d && m && y && `${m} ${d}, ${y}`
+        },
+        currentAge(person, _, ctx) {
+            return (
+                new Date().getFullYear() -
+                new Date(person.birthday).getFullYear()
+            )
+        },
         parents(person, _, ctx) {
             return ctx.Person.find({
                 _id: { $in: [person.father, person.mother] },
@@ -59,9 +88,9 @@ export const resolvers = {
                 _id: { $in: person.children },
             })
         },
-        children(person, _, ctx) {
+        siblings(person, _, ctx) {
             return ctx.Person.find({
-                _id: { $in: person.children },
+                _id: { $in: person },
             })
         },
     },
