@@ -1,9 +1,14 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
+function capitalize(val) {
+    if (typeof val !== 'string') val = ''
+    return val.charAt(0).toUpperCase() + val.substring(1)
+}
+
 const personSchema = new Schema({
-    firstName: { type: String },
-    lastName: { type: String },
+    firstName: { type: String, set: capitalize, trim: true },
+    lastName: { type: String, set: capitalize, trim: true },
     gender: { type: String },
     birthday: { type: Date },
     currentDay: { type: String },
