@@ -1,11 +1,16 @@
 import { gql } from 'apollo-server'
 
 export const typeDefs = gql`
+    enum Genders {
+        MALE
+        FEMALE
+    }
+
     type Person {
         id: ID
         firstName: String
         lastName: String
-        gender: String
+        gender: Genders
         birthday: String
         currentAge: String
         mother: Person
@@ -19,7 +24,7 @@ export const typeDefs = gql`
         id: ID
         firstName: String
         lastName: String
-        gender: String
+        gender: Genders
         birthday: String
         mother: PersonInput
         father: PersonInput
