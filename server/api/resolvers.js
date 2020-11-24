@@ -8,6 +8,8 @@ export const resolvers = {
         },
     },
     Mutation: {
+        updatePerson: async (_, { input }, ctx) => {},
+        removePerson: async (_, { input }, ctx) => {},
         newPerson: async (_, { input, mother, father }, ctx) => {
             const motherId =
                 mother &&
