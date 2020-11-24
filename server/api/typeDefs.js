@@ -32,6 +32,8 @@ export const typeDefs = gql`
     }
 
     type Mutation {
+        updatePerson(input: PersonInput): Person
+        removePerson(input: PersonInput): Person
         newPerson(
             input: PersonInput!
             mother: PersonInput

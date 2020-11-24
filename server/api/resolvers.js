@@ -11,6 +11,8 @@ export const resolvers = {
         updatePerson: async (_, { input }, ctx) => {},
         removePerson: async (_, { input }, ctx) => {},
         newPerson: async (_, { input, mother, father }, ctx) => {
+            const updateParents = {}
+
             const motherId =
                 mother &&
                 (await ctx.Person.findOneAndUpdate(
@@ -20,7 +22,7 @@ export const resolvers = {
                         new: true,
                         upsert: true,
                     }
-                ).then((mother) => mother.id))
+                ).then((mother) => (updateParents.mother = mother.id)))
 
             const fatherId =
                 father &&
@@ -31,18 +33,15 @@ export const resolvers = {
                         new: true,
                         upsert: true,
                     }
-                ).then((father) => father.id))
+                ).then((father) => (updateParents.father = father.id)))
 
             const newPerson = await ctx.Person.findOneAndUpdate(
                 input,
-                {
-                    mother: motherId,
-                    father: fatherId,
-                },
+                updateParents,
                 { new: true, upsert: true }
             )
 
-            const updateParents = await ctx.Person.updateMany(
+            const addChildToParents = await ctx.Person.updateMany(
                 { _id: { $in: [newPerson.mother, newPerson.father] } },
                 { $addToSet: { children: newPerson.id } }
             )
