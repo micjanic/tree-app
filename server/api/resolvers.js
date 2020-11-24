@@ -4,30 +4,38 @@ export const resolvers = {
             return ctx.Person.findOne(input)
         },
         people: (_, { input }, ctx) => {
-            return ctx.Person.find({})
+            return ctx.Person.find(input)
         },
     },
     Mutation: {
         newPerson: async (_, { input, mother, father }, ctx) => {
+            const motherId =
+                mother &&
+                (await ctx.Person.findOneAndUpdate(
+                    mother,
+                    {},
+                    {
+                        new: true,
+                        upsert: true,
+                    }
+                ).then((mother) => mother.id))
+
+            const fatherId =
+                father &&
+                (await ctx.Person.findOneAndUpdate(
+                    father,
+                    {},
+                    {
+                        new: true,
+                        upsert: true,
+                    }
+                ).then((father) => father.id))
+
             const newPerson = await ctx.Person.findOneAndUpdate(
                 input,
                 {
-                    mother: await ctx.Person.findOneAndUpdate(
-                        mother,
-                        {},
-                        {
-                            new: true,
-                            upsert: true,
-                        }
-                    ).then((mother) => mother.id),
-                    father: await ctx.Person.findOneAndUpdate(
-                        father,
-                        {},
-                        {
-                            new: true,
-                            upsert: true,
-                        }
-                    ).then((father) => father.id),
+                    mother: motherId,
+                    father: fatherId,
                 },
                 { new: true, upsert: true }
             )
@@ -66,6 +74,7 @@ export const resolvers = {
                 'November',
                 'December',
             ]
+
             const d = date.getDate()
             const m = strArray[date.getMonth()]
             const y = date.getFullYear()
