@@ -8,8 +8,10 @@ export const typeDefs = gql`
 
     type Person {
         id: ID
-        firstName: String!
-        lastName: String!
+        firstName: String
+        middleName: String
+        lastName: String
+        maidenName: String
         gender: Genders
         birthday: String
         currentAge: String
@@ -22,8 +24,10 @@ export const typeDefs = gql`
 
     input PersonInput {
         id: ID
-        firstName: String!
-        lastName: String!
+        firstName: String
+        middleName: String
+        lastName: String
+        maidenName: String
         gender: Genders
         birthday: String
         mother: PersonInput

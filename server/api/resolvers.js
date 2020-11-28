@@ -99,9 +99,23 @@ export const resolvers = {
             })
         },
         siblings(person, _, ctx) {
-            return ctx.Person.find({
-                _id: { $in: person },
-            })
+            const getSiblingIds = ctx.Person.find({
+                children: person.id,
+            }).then((parents) =>
+                ctx.Person.find({
+                    _id: {
+                        $in: parents
+                            .map((parent) =>
+                                parent.children.filter(
+                                    (child) => child !== person.id
+                                )
+                            )
+                            .flat(),
+                    },
+                })
+            )
+
+            return getSiblingIds
         },
     },
 }
