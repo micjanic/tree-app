@@ -12,9 +12,9 @@ export const resolvers = {
         removePerson: async (_, { input }, ctx) => {},
         newPerson: async (_, { input, mother, father }, ctx) => {
             const updateParents = {}
+            const { firstName, lastName, gender, birthday } = input
 
-            const motherId =
-                mother &&
+            mother &&
                 (await ctx.Person.findOneAndUpdate(
                     mother,
                     {},
@@ -24,8 +24,7 @@ export const resolvers = {
                     }
                 ).then((mother) => (updateParents.mother = mother.id)))
 
-            const fatherId =
-                father &&
+            father &&
                 (await ctx.Person.findOneAndUpdate(
                     father,
                     {},
@@ -36,8 +35,8 @@ export const resolvers = {
                 ).then((father) => (updateParents.father = father.id)))
 
             const newPerson = await ctx.Person.findOneAndUpdate(
-                input,
-                updateParents,
+                { firstName, lastName },
+                { ...updateParents, gender, birthday },
                 { new: true, upsert: true }
             )
 
