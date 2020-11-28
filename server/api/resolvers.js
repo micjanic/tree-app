@@ -40,10 +40,11 @@ export const resolvers = {
                 { new: true, upsert: true }
             )
 
-            const addChildToParents = await ctx.Person.updateMany(
+            await ctx.Person.updateMany(
                 { _id: { $in: [newPerson.mother, newPerson.father] } },
                 { $addToSet: { children: newPerson.id } }
             )
+
             return newPerson
         },
         removeAll: (_, __, ctx) => {
