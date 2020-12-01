@@ -9,15 +9,33 @@ export const resolvers = {
     },
     Mutation: {
         updatePerson: async (_, { input }, ctx) => {},
-        removePerson: async (_, { input }, ctx) => {},
+        removePerson: async (_, { input }, ctx) => {
+            const findPerson = await ctx.Person.findOne(input)
+
+            const removeMothers = await ctx.Person.updateMany(
+                { mother: findPerson.id },
+                { $unset: { mother: '' } }
+            )
+            const removeFathers = await ctx.Person.updateMany(
+                { father: findPerson.id },
+                { $unset: { father: '' } }
+            )
+
+            return await ctx.Person.deleteOne(findPerson)
+            //console.log(findPerson)
+            //console.log(person)
+
+            //return findPerson
+        },
         newPerson: async (_, { input, mother, father }, ctx) => {
             const updateParents = {}
-            const { firstName, lastName, gender, birthday } = input
-
             mother &&
                 (await ctx.Person.findOneAndUpdate(
+                    {
+                        firstName: mother.firstName,
+                        lastName: mother.lastName,
+                    },
                     mother,
-                    {},
                     {
                         new: true,
                         upsert: true,
@@ -26,8 +44,11 @@ export const resolvers = {
 
             father &&
                 (await ctx.Person.findOneAndUpdate(
+                    {
+                        firstName: father.firstName,
+                        lastName: father.lastName,
+                    },
                     father,
-                    {},
                     {
                         new: true,
                         upsert: true,
@@ -35,12 +56,12 @@ export const resolvers = {
                 ).then((father) => (updateParents.father = father.id)))
 
             const newPerson = await ctx.Person.findOneAndUpdate(
-                { firstName, lastName },
-                { ...updateParents, gender, birthday },
+                { firstName: input.firstName, lastName: input.lastName },
+                { ...updateParents, ...input },
                 { new: true, upsert: true }
             )
 
-            await ctx.Person.updateMany(
+            const addChildrenToParents = await ctx.Person.updateMany(
                 { _id: { $in: [newPerson.mother, newPerson.father] } },
                 { $addToSet: { children: newPerson.id } }
             )

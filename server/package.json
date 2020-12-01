@@ -4,7 +4,7 @@
     "description": "",
     "main": "api/server.js",
     "scripts": {
-        "server": "nodemon --exec babel-node api/server.js"
+        "start": "nodemon --exec babel-node api/server.js"
     },
     "keywords": [],
     "author": "",
