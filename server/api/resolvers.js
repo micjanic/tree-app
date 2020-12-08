@@ -22,10 +22,6 @@ export const resolvers = {
             )
 
             return await ctx.Person.deleteOne(findPerson)
-            //console.log(findPerson)
-            //console.log(person)
-
-            //return findPerson
         },
         newPerson: async (_, { input, mother, father }, ctx) => {
             const updateParents = {}
