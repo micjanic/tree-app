@@ -1,11 +1,11 @@
 import logo from './logo.svg'
 import './App.css'
-import Person from './components/Person'
+import TreeGraph from './components/TreeGraph'
 
 function App() {
     return (
         <div className="App">
-            <Person />
+            <TreeGraph />
         </div>
     )
 }
