@@ -6,9 +6,22 @@ function Node({ current, treeData }) {
         treeData.find((person) => person.id === child.id)
     )
 
-    console.log(childNodes)
+    if (!childNodes.length) {
+        return <div className="end-node">{current.firstName}</div>
+    }
 
-    return <div></div>
+    const renderChildren = childNodes.map((person) => (
+        <div className="node">
+            <Node current={person} treeData={treeData} />
+        </div>
+    ))
+
+    return (
+        <div className="node">
+            <div className="person">{current.firstName}</div>
+            <div className="children">{renderChildren}</div>
+        </div>
+    )
 }
 
 export default Node
