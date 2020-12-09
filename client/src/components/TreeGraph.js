@@ -5,7 +5,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 import Node from './Node'
 
 const ALL_PEOPLE = gql`
-    query Name {
+    query {
         people {
             id
             firstName
@@ -18,8 +18,6 @@ export default function TreeGraph() {
     const [modal, setModal] = useState(false)
     const { data, loading, error } = useQuery(ALL_PEOPLE)
 
-    console.log(data)
-
     if (loading) {
         return <div>Loading...</div>
     } else if (error) {
@@ -28,14 +26,7 @@ export default function TreeGraph() {
 
     return (
         <div>
-            {data &&
-                data.people.map((person) => (
-                    <>
-                        <div>
-                            {person.firstName} {person.lastName}
-                        </div>
-                    </>
-                ))}
+            <Node treeData={data.people} />
         </div>
     )
 }
