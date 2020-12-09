@@ -14,6 +14,17 @@ const ALL_PEOPLE = gql`
     }
 `
 
+const ROOT_NODE = gql`
+    query {
+        people {
+            id
+            parents {
+                id
+            }
+        }
+    }
+`
+
 export default function TreeGraph() {
     const [modal, setModal] = useState(false)
     const { data, loading, error } = useQuery(ALL_PEOPLE)
