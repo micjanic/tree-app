@@ -10,15 +10,10 @@ const ALL_PEOPLE = gql`
             id
             firstName
             lastName
-        }
-    }
-`
-
-const ROOT_NODE = gql`
-    query {
-        people {
-            id
             parents {
+                id
+            }
+            children {
                 id
             }
         }
@@ -35,9 +30,18 @@ export default function TreeGraph() {
         return <div>error</div>
     }
 
+    //console.log(data)
+
+    const rootNodes = data.people.filter(
+        (person) => person.parents.length === 0
+    )
+    console.log(rootNodes)
+
     return (
-        <div>
-            <Node treeData={data.people} />
+        <div className="tree-graph">
+            {rootNodes.map((person) => (
+                <Node current={person} treeData={data.people} />
+            ))}
         </div>
     )
 }
