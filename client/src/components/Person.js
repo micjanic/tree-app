@@ -1,5 +1,10 @@
 import React from 'react'
 
 export default function Person({ personData }) {
-    return <div className="person-info"></div>
+    const { firstName, lastName } = personData
+    return (
+        <div className="person">
+            <div className="first-name">{firstName}</div>
+        </div>
+    )
 }

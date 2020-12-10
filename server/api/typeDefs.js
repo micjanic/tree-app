@@ -11,6 +11,7 @@ export const typeDefs = gql`
         firstName: String
         middleName: String
         lastName: String
+        spouse: ID
         maidenName: String
         gender: Genders
         birthday: String

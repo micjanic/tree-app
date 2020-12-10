@@ -32,16 +32,11 @@ export default function TreeGraph() {
 
     //console.log(data)
 
-    const rootNodes = data.people.filter(
-        (person) => person.parents.length === 0
-    )
-    console.log(rootNodes)
+    const rootNode = data.people.find((person) => person.parents.length === 0)
 
     return (
         <div className="tree-graph">
-            {rootNodes.map((person) => (
-                <Node current={person} treeData={data.people} />
-            ))}
+            <Node current={rootNode} treeData={data.people} />
         </div>
     )
 }

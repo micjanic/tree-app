@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Person } from './Person'
+import Person from './Person'
 
 function Node({ current, treeData }) {
     const childNodes = current.children.map((child) =>
@@ -7,18 +7,16 @@ function Node({ current, treeData }) {
     )
 
     if (!childNodes.length) {
-        return <div className="end-node">{current.firstName}</div>
+        return <div className="node end-node">{current.firstName}</div>
     }
 
     const renderChildren = childNodes.map((person) => (
-        <div className="node">
-            <Node current={person} treeData={treeData} />
-        </div>
+        <Node current={person} treeData={treeData} />
     ))
 
     return (
         <div className="node">
-            <div className="person">{current.firstName}</div>
+            <Person personData={current} />
             <div className="children">{renderChildren}</div>
         </div>
     )
