@@ -5,7 +5,7 @@
 }
 
 body {
-    background: #262456;
+    background: #e1e1e1;
 }
 
 .node {
@@ -15,14 +15,18 @@ body {
 }
 
 .person {
-    color: white;
+    display: flex;
+    align-self: center;
+    color: #222;
+    font-weight: 500;
     border-radius: 3px;
     border: 1px solid #b4b2e4;
     padding: 8px;
+    background: white;
 }
 
-.person,
 .children {
     display: flex;
     justify-content: center;
+    margin: 24px 0 24px 0;
 }
