@@ -1,19 +1,30 @@
-import React, { useState, useContext } from 'react'
+import React, { useRef } from 'react'
 import Person from './Person'
 
 function Node({ current, treeData }) {
+    console.log(current)
+
     const childNodes = current.children.map((child) =>
         treeData.find((person) => person.id === child.id)
     )
 
-    const renderChildren = childNodes.map((person) => (
-        <Node current={person} treeData={treeData} />
+    const mapPersonFromTreeData = childNodes.map((person) => (
+        <Node
+            key={person.id}
+            previous={current}
+            current={person}
+            treeData={treeData}
+        />
     ))
 
+    const renderChildren = mapPersonFromTreeData.length > 0 && (
+        <div className="children">{mapPersonFromTreeData}</div>
+    )
+
     return (
-        <div className="node">
+        <div id={current.id} className="node">
             <Person personData={current} />
-            <div className="children">{renderChildren}</div>
+            {renderChildren}
         </div>
     )
 }
