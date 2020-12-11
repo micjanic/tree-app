@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import Person from './Person'
 
 function Node({ current, treeData }) {
@@ -8,26 +8,27 @@ function Node({ current, treeData }) {
         const mappedChildNodes = current.children.map((child) =>
             treeData.find((person) => person.id === child.id)
         )
-        setChildNodes(mappedChildNodes)
+
+        const newChildNodes = mappedChildNodes.map((person) => (
+            <Node
+                key={person.id}
+                previous={current}
+                current={person}
+                treeData={treeData}
+            />
+        ))
+
+        setChildNodes(newChildNodes)
     }, [current, treeData])
 
-    const newChildNodes = childNodes.length > 0 && (
-        <div className="children">
-            {childNodes.map((person) => (
-                <Node
-                    key={person.id}
-                    previous={current}
-                    current={person}
-                    treeData={treeData}
-                />
-            ))}
-        </div>
+    const renderChildNodes = childNodes.length > 0 && (
+        <div className="children">{childNodes}</div>
     )
 
     return (
         <div id={current.id} className="node">
             <Person personData={current} />
-            {newChildNodes}
+            {renderChildNodes}
         </div>
     )
 }
