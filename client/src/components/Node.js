@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Person from './Person'
-import DrawLine from './DrawLine'
+import DrawLines from './DrawLine'
 
 function Node({ current, treeData }) {
     const [childNodes, setChildNodes] = useState([])
+    const personRef = useRef()
 
     useEffect(() => {
         const mappedChildNodes = current.children.map((child) =>
             treeData.find((person) => person.id === child.id)
         )
 
-        const newChildNodes = mappedChildNodes.map((person) => (
+        const newChildNodes = mappedChildNodes.map((person, i) => (
             <Node
                 key={person.id}
                 previous={current}
@@ -18,7 +19,7 @@ function Node({ current, treeData }) {
                 treeData={treeData}
             />
         ))
-
+        console.log(personRef.current)
         setChildNodes(newChildNodes)
     }, [current, treeData])
 
@@ -27,10 +28,11 @@ function Node({ current, treeData }) {
     )
 
     return (
-        <div id={current.id} className="node">
-            <Person personData={current} />
-            {renderChildNodes}
-            <DrawLine />
+        <div className="node">
+            <DrawLines>
+                <Person personData={current} personRef={personRef} />
+                {renderChildNodes}
+            </DrawLines>
         </div>
     )
 }

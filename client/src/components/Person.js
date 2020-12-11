@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Person({ personData }) {
+export default function Person({ personData, personRef }) {
     const { firstName, lastName } = personData
     return (
-        <div className="person">
+        <div id={personData.id} className="person" ref={personRef}>
             <div className="first-name">
                 {firstName} {lastName}
             </div>

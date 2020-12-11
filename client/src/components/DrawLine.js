@@ -1,3 +1,4 @@
-export default function DrawLine({ startPoint, endPoints }) {
-    return <svg className="tree-line"></svg>
+export default function DrawLines({ children }) {
+    //console.log(children)
+    return children
 }
