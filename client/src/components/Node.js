@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Person from './Person'
+import DrawLine from './DrawLine'
 
 function Node({ current, treeData }) {
     const [childNodes, setChildNodes] = useState([])
@@ -29,6 +30,7 @@ function Node({ current, treeData }) {
         <div id={current.id} className="node">
             <Person personData={current} />
             {renderChildNodes}
+            <DrawLine />
         </div>
     )
 }
