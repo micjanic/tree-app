@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Person from './Person'
 import DrawLines from './DrawLine'
 
-function Node({ current, treeData }) {
+function Node({ current, treeData, parentRef }) {
     const [childNodes, setChildNodes] = useState([])
     const personRef = useRef()
 
@@ -14,12 +14,12 @@ function Node({ current, treeData }) {
         const newChildNodes = mappedChildNodes.map((person, i) => (
             <Node
                 key={person.id}
-                previous={current}
                 current={person}
                 treeData={treeData}
+                parent={personRef}
             />
         ))
-        console.log(personRef.current)
+
         setChildNodes(newChildNodes)
     }, [current, treeData])
 
