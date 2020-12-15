@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Person from './Person'
 import DrawLines from './DrawLine'
 
-function Node({ current, treeData, parentRef }) {
+function Node({ current, treeData, parent }) {
     const [childNodes, setChildNodes] = useState([])
     const personRef = useRef()
 
@@ -29,10 +29,9 @@ function Node({ current, treeData, parentRef }) {
 
     return (
         <div className="node">
-            <DrawLines>
-                <Person personData={current} personRef={personRef} />
-                {renderChildNodes}
-            </DrawLines>
+            <Person personData={current} personRef={personRef} />
+            {renderChildNodes}
+            <DrawLines child={personRef} parent={parent} />
         </div>
     )
 }
