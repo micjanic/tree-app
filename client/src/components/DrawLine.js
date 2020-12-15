@@ -19,6 +19,22 @@ export default function DrawLines({ parent, child, treeData }) {
                 key={`${parentPos.left + childPos.left}`}
                 x1={parentPos.left + parentPos.width / 2}
                 y1={parentPos.bottom}
+                x2={parentPos.left + parentPos.width / 2}
+                y2={parentPos.bottom + (childPos.top - parentPos.bottom) / 2}
+                stroke="red"
+            />,
+            <line
+                key={`${parentPos.left + childPos.right}`}
+                x1={parentPos.left + parentPos.width / 2}
+                y1={parentPos.bottom + (childPos.top - parentPos.bottom) / 2}
+                x2={childPos.left + childPos.width / 2}
+                y2={parentPos.bottom + (childPos.top - parentPos.bottom) / 2}
+                stroke="red"
+            />,
+            <line
+                key={`${parentPos.top + childPos.bottom}`}
+                x1={childPos.left + childPos.width / 2}
+                y1={parentPos.bottom + (childPos.top - parentPos.bottom) / 2}
                 x2={childPos.left + childPos.width / 2}
                 y2={childPos.top}
                 stroke="red"
