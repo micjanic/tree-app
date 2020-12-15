@@ -19,8 +19,8 @@ export default function DrawLines({ parent, child, treeData }) {
                 key={`${parentPos.left + childPos.left}`}
                 x1={parentPos.left + parentPos.width / 2}
                 y1={parentPos.bottom}
-                x2={childPos.left}
-                y2={childPos.y}
+                x2={childPos.left + childPos.width / 2}
+                y2={childPos.top}
                 stroke="red"
             />,
         ])
