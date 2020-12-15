@@ -31,7 +31,13 @@ function Node({ current, treeData, parent }) {
         <div className="node">
             <Person personData={current} personRef={personRef} />
             {renderChildNodes}
-            <DrawLines child={personRef} parent={parent} />
+            {parent && (
+                <DrawLines
+                    child={personRef.current}
+                    parent={parent.current}
+                    treeData={treeData}
+                />
+            )}
         </div>
     )
 }

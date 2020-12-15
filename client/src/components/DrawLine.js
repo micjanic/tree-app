@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useLayoutEffect } from 'react'
 
-export default function DrawLines({ parent, child }) {
+export default function DrawLines({ parent, child, treeData }) {
     const [lines, setLines] = useState([])
 
-    useEffect(() => {
-        if (!parent || !child) {
-            return <></>
-        }
-
+    useLayoutEffect(() => {
         //const parentCur = parent.current
         //const childCur = child.current
 
-        const parentPos = parent && parent.current.getBoundingClientRect()
-        const childPos = child && child.current.getBoundingClientRect()
+        if (!parent || !child) {
+            return
+        }
+
+        const parentPos = parent && parent.getBoundingClientRect()
+        const childPos = child && child.getBoundingClientRect()
 
         setLines([
             <line
-                //key={`${}`}
+                key={`${parentPos.left + childPos.left}`}
                 x1={parentPos.left + parentPos.width / 2}
                 y1={parentPos.bottom}
                 x2={childPos.left}
@@ -24,7 +24,7 @@ export default function DrawLines({ parent, child }) {
                 stroke="red"
             />,
         ])
-    }, [parent, child])
+    }, [parent, child, treeData])
 
     //const startTop = start.current.getBoundingClientRect().top
 
