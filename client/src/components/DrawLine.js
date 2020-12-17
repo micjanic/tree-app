@@ -1,12 +1,9 @@
 import React, { useState, useLayoutEffect } from 'react'
 
-export default function DrawLines({ parent, child, treeData }) {
+export default function DrawLines({ parent, child, windowWidth }) {
     const [lines, setLines] = useState([])
 
     useLayoutEffect(() => {
-        //const parentCur = parent.current
-        //const childCur = child.current
-
         if (!parent || !child) {
             return
         }
@@ -37,9 +34,7 @@ export default function DrawLines({ parent, child, treeData }) {
                 y2={childPos.top}
             />,
         ])
-    }, [parent, child, treeData])
-
-    //const startTop = start.current.getBoundingClientRect().top
+    }, [parent, child, windowWidth])
 
     return <svg className="tree-line">{lines}</svg>
 }

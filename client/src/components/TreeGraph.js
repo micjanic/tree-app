@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import gql from 'graphql-tag'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 
@@ -23,6 +23,13 @@ const ALL_PEOPLE = gql`
 export default function TreeGraph() {
     const [modal, setModal] = useState(false)
     const { data, loading, error } = useQuery(ALL_PEOPLE)
+    const [windowWidth, setWindowWidth] = useState(0)
+
+    const updateSize = () => setWindowWidth(window.innerWidth)
+
+    useEffect(() => {
+        window.addEventListener('resize', updateSize)
+    }, [])
 
     if (loading) {
         return <div>Loading...</div>
@@ -30,13 +37,15 @@ export default function TreeGraph() {
         return <div>error</div>
     }
 
-    //console.log(data)
-
     const rootNode = data.people.find((person) => person.parents.length === 0)
 
     return (
         <div className="tree-graph">
-            <Node currentPerson={rootNode} treeData={data.people} />
+            <Node
+                currentPerson={rootNode}
+                windowWidth={windowWidth}
+                treeData={data.people}
+            />
         </div>
     )
 }

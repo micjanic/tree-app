@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef, useLayoutEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Person from './Person'
 import DrawLines from './DrawLine'
 
-function Node({ currentPerson, treeData, parent }) {
+function Node({ currentPerson, parentRef, treeData, windowWidth }) {
     const [childNodes, setChildNodes] = useState([])
     const personRef = useRef()
 
@@ -15,13 +15,14 @@ function Node({ currentPerson, treeData, parent }) {
             <Node
                 key={person.id}
                 currentPerson={person}
+                parentRef={personRef}
+                windowWidth={windowWidth}
                 treeData={treeData}
-                parent={personRef}
             />
         ))
 
         setChildNodes(newChildNodes)
-    }, [currentPerson, treeData])
+    }, [currentPerson, treeData, windowWidth])
 
     const renderChildNodes = childNodes.length > 0 && (
         <div className="children">{childNodes}</div>
@@ -31,11 +32,11 @@ function Node({ currentPerson, treeData, parent }) {
         <div className="node">
             <Person currentPerson={currentPerson} personRef={personRef} />
             {renderChildNodes}
-            {parent && (
+            {parentRef && (
                 <DrawLines
                     child={personRef.current}
-                    parent={parent.current}
-                    treeData={treeData}
+                    parent={parentRef.current}
+                    windowWidth={windowWidth}
                 />
             )}
         </div>
