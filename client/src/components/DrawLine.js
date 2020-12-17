@@ -15,7 +15,7 @@ export default function DrawLines({ parent, child, windowWidth, totalNumber }) {
             <line
                 key={`${parentPos.left + childPos.left}`}
                 x1={parentPos.left + parentPos.width / 2}
-                y1={parentPos.bottom}
+                y1={parentPos.bottom + 10}
                 x2={parentPos.left + parentPos.width / 2}
                 y2={parentPos.bottom + (childPos.top - parentPos.bottom) / 2}
             />,
@@ -31,7 +31,7 @@ export default function DrawLines({ parent, child, windowWidth, totalNumber }) {
                 x1={childPos.left + childPos.width / 2}
                 y1={parentPos.bottom + (childPos.top - parentPos.bottom) / 2}
                 x2={childPos.left + childPos.width / 2}
-                y2={childPos.top}
+                y2={childPos.top - 10}
             />,
         ])
     }, [parent, child, windowWidth, totalNumber])

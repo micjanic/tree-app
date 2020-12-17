@@ -1,16 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700;800&family=Roboto&display=swap');
+
 * {
     box-sizing: border-box;
     font-size: 14px;
-    font-family: Helvetica, Arial, sans-serif;
 }
 
 body {
-    background: #e1e1e1;
-}
-
-.tree-graph {
-    position: relative;
-    zoom: 1;
+    background: linear-gradient(90deg, #f6f5fa 21px, transparent 1%) center,
+        linear-gradient(#f6f5fa 21px, transparent 1%) center, #e6e4eb;
+    background-size: 22.5px 22.5px;
 }
 
 .node {
@@ -28,6 +26,23 @@ body {
     padding: 16px;
     background: white;
     text-align: center;
+    font-family: 'Open Sans', 'Arial';
+    font-weight: 800;
+    font-style: normal;
+}
+
+.person.male {
+    border: 2px solid #2cadf6;
+}
+
+.person.female {
+    border: 2px solid #f62c86;
+}
+
+.tree-graph {
+    position: relative;
+    zoom: 1;
+    cursor: grab;
 }
 
 .tree-graph,
@@ -44,6 +59,6 @@ body {
     top: 0;
     left: 0;
     shape-rendering: crispedges;
-    stroke: black;
+    stroke: #938ea6;
     stroke-width: 2px;
 }

@@ -10,6 +10,7 @@ const ALL_PEOPLE = gql`
             id
             firstName
             lastName
+            gender
             parents {
                 id
             }
@@ -28,7 +29,9 @@ export default function TreeGraph() {
 
     useEffect(() => {
         const resizeObserver = new ResizeObserver((entry) => {
-            setWindowWidth(entry[0].target.offsetWidth)
+            if (entry[0].contentRect.width !== windowWidth) {
+                setWindowWidth(entry[0].contentRect.width)
+            }
         })
 
         treeRef.current && resizeObserver.observe(treeRef.current)
