@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-export default function DrawLines({ parent, child, windowWidth }) {
+export default function DrawLines({ parent, child, windowWidth, totalNumber }) {
     const [lines, setLines] = useState([])
 
     useEffect(() => {
@@ -34,7 +34,7 @@ export default function DrawLines({ parent, child, windowWidth }) {
                 y2={childPos.top}
             />,
         ])
-    }, [parent, child, windowWidth])
+    }, [parent, child, windowWidth, totalNumber])
 
     return <svg className="tree-line">{lines}</svg>
 }
