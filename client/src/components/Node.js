@@ -1,27 +1,27 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react'
 import Person from './Person'
 import DrawLines from './DrawLine'
 
-function Node({ current, treeData, parent }) {
+function Node({ currentPerson, treeData, parent }) {
     const [childNodes, setChildNodes] = useState([])
     const personRef = useRef()
 
     useEffect(() => {
-        const mappedChildNodes = current.children.map((child) =>
+        const mappedChildNodes = currentPerson.children.map((child) =>
             treeData.find((person) => person.id === child.id)
         )
 
         const newChildNodes = mappedChildNodes.map((person, i) => (
             <Node
                 key={person.id}
-                current={person}
+                currentPerson={person}
                 treeData={treeData}
                 parent={personRef}
             />
         ))
 
         setChildNodes(newChildNodes)
-    }, [current, treeData])
+    }, [currentPerson, treeData])
 
     const renderChildNodes = childNodes.length > 0 && (
         <div className="children">{childNodes}</div>
@@ -29,7 +29,7 @@ function Node({ current, treeData, parent }) {
 
     return (
         <div className="node">
-            <Person personData={current} personRef={personRef} />
+            <Person currentPerson={currentPerson} personRef={personRef} />
             {renderChildNodes}
             {parent && (
                 <DrawLines

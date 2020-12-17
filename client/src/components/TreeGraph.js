@@ -36,7 +36,7 @@ export default function TreeGraph() {
 
     return (
         <div className="tree-graph">
-            <Node current={rootNode} treeData={data.people} />
+            <Node currentPerson={rootNode} treeData={data.people} />
         </div>
     )
 }
