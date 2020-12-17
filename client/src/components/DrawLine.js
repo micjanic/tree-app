@@ -1,9 +1,9 @@
-import React, { useState, useLayoutEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default function DrawLines({ parent, child, windowWidth }) {
     const [lines, setLines] = useState([])
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (!parent || !child) {
             return
         }

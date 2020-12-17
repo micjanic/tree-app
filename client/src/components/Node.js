@@ -22,7 +22,7 @@ function Node({ currentPerson, parentRef, treeData, windowWidth }) {
         ))
 
         setChildNodes(newChildNodes)
-    }, [currentPerson, treeData, windowWidth])
+    }, [parentRef, currentPerson, treeData, windowWidth])
 
     const renderChildNodes = childNodes.length > 0 && (
         <div className="children">{childNodes}</div>

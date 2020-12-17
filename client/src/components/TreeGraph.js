@@ -25,11 +25,13 @@ export default function TreeGraph() {
     const { data, loading, error } = useQuery(ALL_PEOPLE)
     const [windowWidth, setWindowWidth] = useState(0)
 
-    const updateSize = () => setWindowWidth(window.innerWidth)
+    const updateWindowWidth = () => {
+        setWindowWidth(window.innerWidth)
+    }
 
     useEffect(() => {
-        window.addEventListener('resize', updateSize)
-    }, [])
+        window.addEventListener('resize', updateWindowWidth)
+    })
 
     if (loading) {
         return <div>Loading...</div>
