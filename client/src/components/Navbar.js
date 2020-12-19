@@ -3,13 +3,13 @@ import { NavState, SetNavState } from './NavContext'
 
 export default function NavBar() {
     const navToggleState = NavState()
-    const setToggleNav = SetNavState()
+    const setNavToggleState = SetNavState()
 
     return (
         <div className="navbar">
             <button
                 className={`${navToggleState}`}
-                onClick={setToggleNav}
+                onClick={setNavToggleState}
             ></button>
         </div>
     )

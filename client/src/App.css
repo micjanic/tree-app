@@ -45,6 +45,12 @@ body {
     position: relative;
     zoom: 1;
     cursor: grab;
+    transition: all 300ms ease-out;
+    width: 100%;
+}
+
+.tree-graph.nav-open {
+    width: calc(100% - 30%);
 }
 
 .tree-graph,

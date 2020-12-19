@@ -4,6 +4,8 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 
 import Node from './Node'
 
+import { NavState } from './NavContext'
+
 const ALL_PEOPLE = gql`
     query {
         people {
@@ -27,6 +29,8 @@ export default function TreeGraph() {
     const [windowWidth, setWindowWidth] = useState(0)
     const treeRef = useRef()
 
+    const navToggleState = NavState()
+
     useEffect(() => {
         const resizeObserver = new ResizeObserver((entry) => {
             if (entry[0].contentRect.width !== windowWidth) {
@@ -42,10 +46,13 @@ export default function TreeGraph() {
     } else if (error) {
         return <div>error</div>
     }
+
     const rootNode = data.people.find((person) => person.parents.length === 0)
 
+    const navOpenClass = navToggleState ? ' nav-open' : ''
+
     return (
-        <div className="tree-graph" ref={treeRef}>
+        <div className={`tree-graph${navOpenClass}`} ref={treeRef}>
             <Node
                 currentPerson={rootNode}
                 windowWidth={windowWidth}
