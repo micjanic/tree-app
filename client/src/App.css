@@ -64,3 +64,8 @@ body {
     stroke-width: 2px;
     fill: none;
 }
+
+.navbar {
+    background: black;
+    height: 100%;
+}
