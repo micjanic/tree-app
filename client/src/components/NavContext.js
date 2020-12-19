@@ -3,11 +3,11 @@ import React, { useState, useContext, createContext } from 'react'
 const NavContext = createContext()
 const NavUpdateContext = createContext()
 
-export function navState() {
+export function NavState() {
     return useContext(NavContext)
 }
 
-export function setNavState() {
+export function SetNavState() {
     return useContext(NavUpdateContext)
 }
 

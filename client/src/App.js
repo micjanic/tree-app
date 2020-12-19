@@ -3,11 +3,13 @@ import './App.css'
 import TreeGraph from './components/TreeGraph'
 import Navbar from './components/Navbar'
 
-import NavProvider from './components/NavContext'
+import { NavProvider, NavState } from './components/NavContext'
 
 function App() {
+    const navToggleState = NavState()
+
     return (
-        <div className="App">
+        <div className={`App ${navToggleState}`}>
             <NavProvider>
                 <TreeGraph />
                 <Navbar />
