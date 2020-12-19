@@ -5,10 +5,11 @@ export default function NavBar() {
     const navToggleState = NavState()
     const setNavToggleState = SetNavState()
 
+    const navOpenClass = navToggleState ? ' nav-open' : ''
     return (
-        <div className="navbar">
+        <div className={`navbar${navOpenClass}`}>
             <button
-                className={`${navToggleState}`}
+                className="navbar-toggle-btn"
                 onClick={setNavToggleState}
             ></button>
         </div>

@@ -5,6 +5,11 @@
     font-size: 14px;
 }
 
+.App {
+    display: flex;
+    flex-direction: row;
+}
+
 body {
     background: linear-gradient(90deg, #f6f5fa 21px, transparent 1%) center,
         linear-gradient(#f6f5fa 21px, transparent 1%) center, #e6e4eb;
@@ -43,14 +48,12 @@ body {
 
 .tree-graph {
     position: relative;
-    zoom: 1;
-    cursor: grab;
-    transition: all 300ms ease-out;
+    transition: width 300ms ease-out;
     width: 100%;
 }
 
 .tree-graph.nav-open {
-    width: calc(100% - 30%);
+    width: calc(100% - 900px);
 }
 
 .tree-graph,
@@ -73,5 +76,13 @@ body {
 
 .navbar {
     background: black;
-    height: 100%;
+    height: 100vw;
+    flex-direction: column;
+    width: 30px;
+    transition: all 300ms ease-out;
+    z-index: 10;
+}
+
+.navbar.nav-open {
+    width: 900px;
 }
