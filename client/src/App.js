@@ -8,8 +8,10 @@ import NavProvider from './components/NavContext'
 function App() {
     return (
         <div className="App">
-            <TreeGraph />
-            <Navbar />
+            <NavProvider>
+                <TreeGraph />
+                <Navbar />
+            </NavProvider>
         </div>
     )
 }

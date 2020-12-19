@@ -1,5 +1,12 @@
 import React from 'react'
 
+import { navState, setNavState } from './NavContext'
+
 export default function NavBar() {
-    return <div className="navbar">nav</div>
+    const update
+    return (
+        <div className="navbar">
+            <button onclick={}></button>
+        </div>
+    )
 }
