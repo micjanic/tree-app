@@ -11,6 +11,9 @@ export default function DrawLines({ parent, child, windowWidth, totalNumber }) {
         const parentPos = parent && parent.getBoundingClientRect()
         const childPos = child && child.getBoundingClientRect()
 
+        const parentMiddle = parentPos.left + parentPos.width / 2
+        const childMiddle = childPos.left + childPos.width / 2
+        /*
         setLines([
             <line
                 key={`${parentPos.left + childPos.left}`}
@@ -32,6 +35,17 @@ export default function DrawLines({ parent, child, windowWidth, totalNumber }) {
                 y1={parentPos.bottom + (childPos.top - parentPos.bottom) / 2}
                 x2={childPos.left + childPos.width / 2}
                 y2={childPos.top - 10}
+            />,
+        ])*/
+        setLines([
+            <path
+                key={`${parentPos.left + childPos.left}`}
+                //prettier-ignore
+                d={`
+                    M${parentMiddle},${parentPos.bottom} 
+                    Q${parentMiddle},${parentPos.bottom + 30} 
+                    ${childMiddle},${childPos.top}
+                `}
             />,
         ])
     }, [parent, child, windowWidth, totalNumber])

@@ -20,9 +20,9 @@ body {
 .person {
     display: flex;
     align-self: center;
-    color: #222;
+    color: white;
     font-weight: 500;
-    border-radius: 50px;
+    border-radius: 5px;
     padding: 16px;
     background: white;
     text-align: center;
@@ -32,11 +32,13 @@ body {
 }
 
 .person.male {
-    border: 2px solid #2cadf6;
+    background: #c2e9ff;
+    color: rgb(0, 2, 119);
 }
 
 .person.female {
-    border: 2px solid #f62c86;
+    background: #ffc2dd;
+    color: #770036;
 }
 
 .tree-graph {
@@ -58,7 +60,7 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    shape-rendering: crispedges;
     stroke: #938ea6;
     stroke-width: 2px;
+    fill: none;
 }
