@@ -35,17 +35,16 @@ export default function DrawLines({ parent, child, windowWidth, totalNumber }) {
                 y1={parentPos.bottom + (childPos.top - parentPos.bottom) / 2}
                 x2={childPos.left + childPos.width / 2}
                 y2={childPos.top - 10}
-            />,
+            />,${childMiddle},${childPos.top}
         ])*/
         setLines([
             <path
                 key={`${parentPos.left + childPos.left}`}
                 //prettier-ignore
-                d={`
-                    M${parentMiddle},${parentPos.bottom} 
-                    Q${parentMiddle},${parentPos.bottom + 30} 
-                    ${childMiddle},${childPos.top}
-                `}
+                d={`M${parentMiddle},${parentPos.bottom}
+                    L${parentMiddle},${parentPos.bottom + ((childPos.top - parentPos.bottom) / 2)}
+                    L${childMiddle},${parentPos.bottom + ((childPos.top - parentPos.bottom) / 2)}
+                    ${childMiddle},${childPos.top}`}
             />,
         ])
     }, [parent, child, windowWidth, totalNumber])
